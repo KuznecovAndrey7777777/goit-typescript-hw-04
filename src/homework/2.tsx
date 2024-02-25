@@ -1,4 +1,27 @@
-import React, {useReducer} from "react";
+// Ваше завдання – додати типи для наступних елементів коду:
+
+// RequestStep: Це рядковий літерал.
+
+// State: Цей тип являє собою об'єкт з двома властивостями isRequestInProgress і RequestStep
+
+// Action: Це тип, що представляє можливі дії, які можуть бути відправлені до редюсера.
+
+// Дивіться код і опишіть для нього правильні типи.
+
+import React, { useReducer } from "react";
+
+type RequestStep = "idle" | "start" | "pending" | "finished";
+
+type State = {
+  isRequestInProgress: boolean;
+  requestStep: RequestStep;
+};
+
+type Action =
+  | { type: 'START_REQUEST' }
+  | { type: 'PENDING_REQUEST' }
+  | { type: 'FINISH_REQUEST' }
+  | { type: 'RESET_REQUEST' };
 
 const initialState: State = {
   isRequestInProgress: false,
@@ -21,7 +44,10 @@ function requestReducer(state: State, action: Action): State {
 }
 
 export function RequestComponent() {
-  const [requestState, requestDispatch] = useReducer(requestReducer, initialState);
+  const [requestState, requestDispatch] = useReducer(
+    requestReducer,
+    initialState
+  );
 
   const startRequest = () => {
     requestDispatch({ type: 'START_REQUEST' });
